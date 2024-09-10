@@ -1,0 +1,14 @@
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\bin\Debug\net8.0\PR2_RPG_TG.exe
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\bin\Debug\net8.0\PR2_RPG_TG.deps.json
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\bin\Debug\net8.0\PR2_RPG_TG.runtimeconfig.json
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\bin\Debug\net8.0\PR2_RPG_TG.dll
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\bin\Debug\net8.0\PR2_RPG_TG.pdb
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\PR2_RPG_TG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\PR2_RPG_TG.AssemblyInfoInputs.cache
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\PR2_RPG_TG.AssemblyInfo.cs
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\PR2_RPG_TG.csproj.CoreCompileInputs.cache
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\PR2_RPG_TG.dll
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\refint\PR2_RPG_TG.dll
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\PR2_RPG_TG.pdb
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\PR2_RPG_TG.genruntimeconfig.cache
+C:\Users\malan\source\repos\PR2_RPG_TG\PR2_RPG_TG\obj\Debug\net8.0\ref\PR2_RPG_TG.dll
