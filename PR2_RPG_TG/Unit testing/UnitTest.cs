@@ -14,6 +14,7 @@ namespace PR2_RPG_TG.Unit_testing
 {
     internal class UnitTest
     {
+        // Sourced from https://stackoverflow.com/questions/54122982/how-to-color-words-in-different-colours-in-a-console-writeline-in-a-console-appl
         static string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
         static string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";
         static string GREEN = Console.IsOutputRedirected ? "" : "\x1b[92m";
@@ -49,7 +50,6 @@ namespace PR2_RPG_TG.Unit_testing
                 Console.WriteLine(RED + BOLD + " did not pass. (" + e.ToString() + ")");
             }
             */
-
             try
             {
                 ch = new Character(null);
@@ -62,12 +62,12 @@ namespace PR2_RPG_TG.Unit_testing
             }
             try
             {
-                ch.takeDamage(5, 0);
-                ch.heal();
-                ch.takeDamage(-5, 1);
-                ch.heal();
-                ch.takeDamage(3, 8);
-                ch.heal();
+                ch.TakeDamage(5, 0);
+                ch.Heal();
+                ch.TakeDamage(-5, 1);
+                ch.Heal();
+                ch.TakeDamage(3, 8);
+                ch.Heal();
                 Console.WriteLine(GREEN + "Character.takeDamage and Character.heal passed." + NORMAL);
             }
             catch (Exception e)
@@ -78,11 +78,11 @@ namespace PR2_RPG_TG.Unit_testing
 
             try
             {
-                ch.pickupItem(new CoinItem("testCoin", 1, 50));
-                ch.pickupItem(new WeaponItem("testWeapon", 25, 50));
-                ch.pickupItem(new ArmorItem("testArmor", 25, 50));
-                ch.pickupItem(new BasicItem("testBasic", 1));
-                ch.pickupItem<WeaponItem>(null);
+                ch.PickupItem(new CoinItem("testCoin", 1, 50));
+                ch.PickupItem(new WeaponItem("testWeapon", 25, 50));
+                ch.PickupItem(new ArmorItem("testArmor", 25, 50));
+                ch.PickupItem(new BasicItem("testBasic", 1));
+                ch.PickupItem<WeaponItem>(null);
                 Console.WriteLine(GREEN + "Character.pickupItem passed." + NORMAL);
             }
             catch (Exception e)
@@ -93,7 +93,7 @@ namespace PR2_RPG_TG.Unit_testing
 
             try
             {
-                ch.printInventory();
+                ch.PrintInventory();
                 Console.WriteLine(GREEN + "Character.printInventory passed." + NORMAL);
             }
             catch (Exception e)

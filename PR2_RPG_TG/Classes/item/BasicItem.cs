@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using PR2_RPG_TG.Interfaces;
 namespace PR2_RPG_TG.Classes.item
 {
-    internal class BasicItem : Item
+    public class BasicItem : Item
     {
-        public string name { get; set; }
-        public int weight { get; set; }
+        public string Name { get; set; }
+        public int Weight { get; set; }
 
         public BasicItem(string n, int w)
         {
-            name = n;
-            weight = w;
+            Name = n;
+            Weight = w;
         }
     }
 }

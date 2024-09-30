@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PR2_RPG_TG.Interfaces
 {
-    internal interface Item
+    public interface Item
     {
-        public String name { get; set; }
-        public int weight { get; set; }
+        public String Name { get; set; }
+        public int Weight { get; set; }
     }
 }

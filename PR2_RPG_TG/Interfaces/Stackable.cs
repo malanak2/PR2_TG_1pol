@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PR2_RPG_TG.Interfaces
 {
-    internal interface Stackable
+    public interface Stackable
     {
         public int quantity { get; set; }
     }

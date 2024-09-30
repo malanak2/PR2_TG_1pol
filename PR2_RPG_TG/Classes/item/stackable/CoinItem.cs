@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace PR2_RPG_TG.Classes.item.stackable
 {
-    internal class CoinItem : Item, Stackable
+    public class CoinItem : Item, Stackable
     {
-        public string name { get; set; }
-        public int weight { get; set; }
+        public string Name { get; set; }
+        public int Weight { get; set; }
         public int quantity { get; set; }
         public CoinItem(String _name, int w, int q)
         {
-            name = _name;
-            weight = w;
+            Name = _name;
+            Weight = w;
             quantity = q;
         }
     }

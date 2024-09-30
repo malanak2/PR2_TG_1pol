@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
 using PR2_RPG_TG.Classes.item.equipable.armor;
 using PR2_RPG_TG.Classes.item.equipable.weapon;
 using PR2_RPG_TG.Interfaces;
 
 namespace PR2_RPG_TG.Classes
 {
-    internal class Character
+    public class Character
     {
         private string _name ="";
 
@@ -40,7 +33,11 @@ namespace PR2_RPG_TG.Classes
         Random rand;
         public Character(string name)
         {
-            if (name == null) return;
+            if (name == null)
+            {
+                _name = name;
+                return;
+            }
             rand = new Random();
             _name = name;
             inventory = new ArrayList();
@@ -55,27 +52,35 @@ namespace PR2_RPG_TG.Classes
 
         public override string ToString()
         {
-            if (weapon == null && armor == null) return String.Format("{0}: str {1}, dex {2}, res {3}, hp {4}/{5}, weight {6}/{7}", _name, str, dex, res, HP, maxHP, weight, capacity);
-            if (weapon == null) return String.Format("{0}: str {1}, dex {2}, res {3}(+{8}), hp {4}/{5}, weight {6}/{7}", _name, str, dex, res, HP, maxHP, weight, capacity, armor.defense);
-            if (armor == null) return String.Format("{0}: str {1}(+{8}), dex {2}, res {3}, hp {4}/{5}, weight {6}/{7}", _name, str, dex, res, HP, maxHP, weight, capacity, weapon.damage);
-            return String.Format("{0}: str {1}(+{8}), dex {2}, res {3}(+{9}), hp {4}/{5}, weight {6}/{7}", _name, str, dex, res, HP, maxHP, weight, capacity, weapon.damage, armor.defense);
+            string ret = String.Format("{0}: str {1}", _name, str);
+            if (weapon != null) ret += String.Format("(+{0})",weapon.Damage);
+            ret += String.Format(", dex {0}, res {1}", dex, res);
+            if (armor != null) ret += String.Format("(+{0})", armor.defense);
+            ret += String.Format(", hp {0}/{1}, weight {2}/{3}", HP, maxHP, weight, capacity);
+            return ret;
 
         }
 
-        public String getName()
+        public String GetName()
         {
             return _name;
         }
 
         /// Combat impl
 
-        public int getDamage()
+        public int GetDamage()
         {
-            if (weapon != null) return str + weapon.damage;
-            return str;
+            int critamount = 0;
+            Random rand = new Random();
+            if (rand.Next(0, 10) == 0) { 
+                critamount = 9999; 
+                Console.WriteLine(String.Format("{0} has dealt a CRITICAL HIT!", _name));
+            }
+            if (weapon != null) return str + weapon.Damage+ critamount;
+            return str + critamount;
         }
 
-        public int getDef()
+        public int GetDef()
         {
             if (armor != null) return res + armor.defense;
             return res;
@@ -85,10 +90,10 @@ namespace PR2_RPG_TG.Classes
         /// Takes damage and checks if the character has died (is at the end of the calculation)
         /// </summary>
         /// <param name="damage"></param>
-        public void takeDamage(float damage, float randDef)
+        public void TakeDamage(float damage, float randDef)
         {
             if (damage <= 0) return;
-            double taken = damage - (damage * (1/(randDef + res)));
+            double taken = damage - (damage * ((randDef + res)/100));
             taken = Math.Round(taken, 2);
             HP -= taken;
             HP = Math.Round(HP, 2);
@@ -99,12 +104,12 @@ namespace PR2_RPG_TG.Classes
             }
         }
 
-        public void heal()
+        public void Heal()
         {
             HP = maxHP;
         }
 
-        public bool isAlive()
+        public bool IsAlive()
         {
             return HP > 0; 
         }
@@ -116,10 +121,10 @@ namespace PR2_RPG_TG.Classes
         /// Tries to pick up an item and add it to the inventory
         /// </summary>
         /// <param name="item">item to pick up</param>
-        public void pickupItem<T>(T item) where T : Item
+        public void PickupItem<T>(T item) where T : Item
         {
             if (item == null) return;
-            if ((weight + item.weight) <= capacity)
+            if ((weight + item.Weight) <= capacity)
             {
                 if (item is Equipable)
                 {
@@ -130,9 +135,9 @@ namespace PR2_RPG_TG.Classes
                             Console.WriteLine(String.Format("{0} already has a Weapon!", _name));
                             return;
                         }
-                        Console.WriteLine(String.Format("{0} has equipped {1}!", _name, item.name));
+                        Console.WriteLine(String.Format("{0} has equipped {1}!", _name, item.Name));
                         weapon = (Weapon)item;
-                        weight += item.weight;
+                        weight += item.Weight;
                         return;
                     }
                     if (item is ArmorItem)
@@ -142,9 +147,9 @@ namespace PR2_RPG_TG.Classes
                             Console.WriteLine(String.Format("{0} already has Armor!", _name));
                             return;
                         }
-                        Console.WriteLine(String.Format("{0} has equipped {1}!", _name, item.name));
+                        Console.WriteLine(String.Format("{0} has equipped {1}!", _name, item.Name));
                         armor = (Armor)item;
-                        weight += item.weight;
+                        weight += item.Weight;
                         return;
                     }
                 }
@@ -154,7 +159,7 @@ namespace PR2_RPG_TG.Classes
                     Stackable og = (Stackable)item;
                     foreach (Item i in inventory)
                     {
-                        if (i.name == item.name)
+                        if (i.Name == item.Name)
                         {
                             contains = true;
                             og = (Stackable)i;
@@ -171,28 +176,33 @@ namespace PR2_RPG_TG.Classes
                     {
                         inventory.Add(item);
                     }
-                    weight += item.weight * stackable.quantity;
+                    weight += item.Weight * stackable.quantity;
                     return;
                 }
                 else inventory.Add(item);
-                Console.WriteLine(String.Format("{0} has picked up {1}!", _name, item.name));
-                weight += item.weight;
+                Console.WriteLine(String.Format("{0} has picked up {1}!", _name, item.Name));
+                weight += item.Weight;
             }
             else
             {
-                Console.WriteLine(String.Format("{0} is too heavy! ({1}/{2}, {3})", item.name, weight, capacity, item.weight));
+                Console.WriteLine(String.Format("{0} is too heavy! ({1}/{2}, {3})", item.Name, weight, capacity, item.Weight));
             }
         }
 
         /// <summary>
         /// Prints the inventory contents
         /// </summary>
-        public void printInventory()
+        public void PrintInventory()
         {
+            if (inventory.Count == 0)
+            {
+                Console.WriteLine(String.Format("{0}'s inventory is empty!", _name));
+                return;
+            }
             string text = "";
             foreach (Item item in inventory)
             {
-                text += item.name;
+                text += item.Name;
                 if (item is Stackable)
                 {
                     Stackable stackable = (Stackable)item;
@@ -200,7 +210,7 @@ namespace PR2_RPG_TG.Classes
                 }
                 text += ", ";
             }
-            text = text.TrimEnd(new char[] { ',', ' ' });
+            text = text.TrimEnd([',', ' ']);
             Console.WriteLine(String.Format("{0}'s inventory contains: {1}", _name, text));
         }   
     }

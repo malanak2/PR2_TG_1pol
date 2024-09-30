@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PR2_RPG_TG.Interfaces
 {
-    internal interface Armor
+    public interface Armor
     {
         public int defense { get; set; }
     }

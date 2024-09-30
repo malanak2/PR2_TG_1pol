@@ -8,16 +8,16 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace PR2_RPG_TG.Classes.item.equipable.armor
 {
-    internal class ArmorItem : Item, Armor, Equipable
+    public class ArmorItem : Item, Armor, Equipable
     {
-        public string name { get; set; }
-        public int weight { get; set; }
+        public string Name { get; set; }
+        public int Weight { get; set; }
         public int defense { get; set; }
 
         public ArmorItem(String _name, int w, int d)
         {
-            name = _name;
-            weight = w;
+            Name = _name;
+            Weight = w;
             defense = d;
         }
     }

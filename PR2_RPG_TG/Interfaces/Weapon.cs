@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PR2_RPG_TG.Interfaces
 {
-    internal interface Weapon
+    public interface Weapon
     {
-        public int damage { get; set; }
+        public int Damage { get; set; }
     }
 }
